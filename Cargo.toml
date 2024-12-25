@@ -4,3 +4,6 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+tokio = { version = "1", features = ["full"] } # some async stuff 
+axum = "0.6" # the server, like Express in node
+serde = { version = "1.0", features = ["derive"]} # serialization, deserialization of JSON
