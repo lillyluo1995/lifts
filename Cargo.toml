@@ -7,3 +7,5 @@ edition = "2021"
 tokio = { version = "1", features = ["full"] } # some async stuff 
 axum = "0.6" # the server, like Express in node
 serde = { version = "1.0", features = ["derive"]} # serialization, deserialization of JSON
+async-graphql = "6.0.6"
+async-graphql-axum = "6.0.6"
