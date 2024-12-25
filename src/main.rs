@@ -1,4 +1,6 @@
 mod routes;
+mod model; // for some reason all the pkgs must be declared here in main??
+
 use routes::{health, graphql_handler, graphql_playground};
 use axum::{routing::get, Router, Server};
 
