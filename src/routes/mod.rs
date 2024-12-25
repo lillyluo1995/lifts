@@ -1,4 +1,4 @@
-use crate::model;
+use crate::model::ServiceSchema;
 use async_graphql::http::{playground_source, GraphQLPlaygroundConfig};
 use async_graphql_axum::{GraphQLRequest, GraphQLResponse};
 use axum::{
@@ -8,7 +8,6 @@ use axum::{
     Json,
 };
 use serde::Serialize;
-
 
 #[derive(Serialize)] // means the struct Health can be serialized. in this case into JSON
 struct Health {
@@ -25,7 +24,7 @@ pub(crate) async fn health() -> impl IntoResponse {
 }
 
 // TODO: idk wtf this is 
-pub(crate) async fn graphql_playround() -> impl IntoResponse {
+pub(crate) async fn graphql_playground() -> impl IntoResponse {
     Html(playground_source(
         GraphQLPlaygroundConfig::new("/").subscription_endpoint("/ws"),
     ))
@@ -33,7 +32,7 @@ pub(crate) async fn graphql_playround() -> impl IntoResponse {
 
 pub(crate) async fn graphql_handler(
     Extension(schema): Extension<ServiceSchema>,
-    req: GraphqlRequest,
+    req: GraphQLRequest,
 ) -> GraphQLResponse {
     schema.execute(req.into_inner()).await.into() // graphql is an api endpoint w/ a special processor
 }
